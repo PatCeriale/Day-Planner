@@ -1,33 +1,37 @@
-localStorage.setItem("name", "Patrick");
-//
-let hour = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
-let fullDayBlock = $("full-day-block");
+let currentDay = $("#currentDay");
+let dayBlockContainer = $("#day-block-container");
+let currentHour = moment().hour();
+// TODO: Using moment.js show the date on top of the calendar
+currentDay.text(moment().dayOfYear);
+// Create time blocks using jQuery with a for loop
+for (let i = 9; i <= 17; i++) {
+  let hourStr = (i % 12 || 12) + (i < 12 ? "AM" : "PM");
+  let newBlock = $('<div class="row time-block">');
 
-// TODO: Create time blocks using jQuery with a for loop
-for (let i = 0; i < hour.length; i++) {
-  let newBlock = $("<div>");
-  newBlock.addClass("time-block"); //add in bootstrap classes here?
-  newBlock.attr("data-time", hour[i]);
-  newBlock.text(hour[i]);
-  fullDayBlock.append(newBlock);
-  console.log(newBlock);
+  let hourDiv = $('<div class="col-md-2 hour">');
+  hourDiv.text(hourStr);
+  // Create text areas that respond to current time by changing color
+  let textArea = $('<textarea class="col-md-8">');
+  if (i < currentHour) {
+    textArea.addClass("past");
+  } else if (i > currentHour) {
+    textArea.addClass("future");
+  } else {
+    textArea.addClass("present");
+  }
+
+  // Retrieve information from local storage and display in text area
+  textArea.val(localStorage.getItem(hourStr));
+  // Create save button and click event that saves value of text area to local storage
+  let saveBtn = $(
+    `<button class="col-md-2 saveBtn">
+      <i class="far fa-save"></i>
+    </button>`
+  );
+  saveBtn.on("click", function (event) {
+    localStorage.setItem(hourStr, textArea.val());
+  });
+  newBlock.append(hourDiv, textArea, saveBtn);
+  dayBlockContainer.append(newBlock);
+  //   console.log(newBlock);
 }
-
-//- one row with time, text area and button using jq
-// {<div class="row  time-block">
-// <div class="col-md-2 hour">
-//   9 AM
-// </div>
-// <textarea class="col-md-8 past">
-
-// </textarea>
-// <button class="col-md-2 saveBtn ">
-//   Save
-// </button>
-// </div> }
-// TODO: Using moment.js show the time on th top of the calendar
-// TODO: using moment.js change the color of the calendar depending on the time of day
-// TODO: Create click event listener for my save buttons
-// TODO: Save text from each time block to local storage
-//      TODO: Grab text from text area and localStorage.setItem
-//      TODO: Retrieve data and show on page with localStorage.getItem
