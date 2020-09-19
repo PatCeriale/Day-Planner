@@ -10,7 +10,7 @@
 
 **Technologies**
 
-> This Day Planner app was created using HTML, CSS, Bootstrap, jQuery, Moment.js and Font Awesome. The date and time are sourced from Moment.Js and create the date display as well as time of day on the calendar itself. The time blocks are propagated using jQuery and respond
+> This Day Planner app was created using HTML, CSS, Bootstrap, jQuery, Moment.js and Font Awesome. The date and time are sourced from Moment.Js and create the date display as well as time of day on the calendar itself. The time blocks are propagated using jQuery and respond individually to their own time, text areas and save buttons.
 
 **Future Development**
 
