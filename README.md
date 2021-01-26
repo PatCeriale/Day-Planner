@@ -6,7 +6,7 @@
 
 **Deployment**
 
-> Launch url in web browser, enter your daily activities, and save. Become the most productive member of society!!!
+> Launch url in web browser, enter your daily activities, and save. **Become the most productive member of society!!!**
 
 **Technologies**
 
